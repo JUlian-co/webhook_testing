@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h1 {
+  @apply text-5xl font-semibold text-left mb-4 capitalize;
+}
+
+.h1desc {
+  @apply text-lg text-left text-gray-400;
+}
+
+.secbutton {
+  @apply p-4 ring-1 rounded-lg ring-gray-400 hover:bg-white/10 transition cursor-pointer text-gray-400 active:scale-95;
+}
