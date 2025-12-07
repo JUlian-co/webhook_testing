@@ -29,6 +29,10 @@ h1 {
   @apply text-5xl font-semibold text-left mb-4 capitalize;
 }
 
+h2 {
+  @apply font-semibold text-xl text-white/70;
+}
+
 .h1desc {
   @apply text-lg text-left text-gray-400;
 }
