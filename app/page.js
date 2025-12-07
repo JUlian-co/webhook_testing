@@ -1,5 +1,6 @@
 "use client";
 
+import { useComs } from "@/hooks/useComs";
 import { useUser } from "@/hooks/useUser";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -7,8 +8,11 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [creating, setCreating] = useState(false);
+
   const router = useRouter();
+
   const { name, id, loaded } = useUser();
+  const { coms, loaded: cloaded } = useComs();
 
   console.log("nammmmemeeee in main page: ", name, id);
 
@@ -17,6 +21,7 @@ export default function Home() {
 
     if (!id) {
       router.push("/login");
+      return;
     }
   }, [id, router]);
 
@@ -52,8 +57,17 @@ export default function Home() {
         </button>
       </header>
 
-      <main className="flex items-start justify-start">
+      <main className="flex items-start justify-start gap-8">
         {/* Hier kommen die company karten hin */}
+        {coms.map((com) => (
+          <a
+            key={com.id}
+            className="p-8 bg-gray-50/20 rounded-lg cursor-pointer hover:bg-gray-50/30 transition active:scale-90"
+            href={`/${com.id}`}
+          >
+            <p>{com.name}</p>
+          </a>
+        ))}
       </main>
 
       {creating && (
