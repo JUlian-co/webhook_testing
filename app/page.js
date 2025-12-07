@@ -26,6 +26,18 @@ export default function Home() {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const companyName = formData.get("companyName").toString().trim();
+
+    const res = await fetch("/api/company", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: companyName, userId: id }),
+    });
+
+    console.log("res from create com: ", res);
+
+    setCreating(false);
   };
 
   return (

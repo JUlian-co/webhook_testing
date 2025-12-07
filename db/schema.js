@@ -10,5 +10,5 @@ export const companies = pgTable("companies", {
   userId: uuid("user_id")
     .references(() => usersTable.id)
     .notNull(),
-  companyName: text("company_name").notNull(),
+  name: text("name").notNull(),
 });
