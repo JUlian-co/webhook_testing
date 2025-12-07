@@ -36,3 +36,15 @@ h1 {
 .secbutton {
   @apply p-4 ring-1 rounded-lg ring-gray-400 hover:bg-white/10 transition cursor-pointer text-gray-400 active:scale-95;
 }
+
+.mainbutton {
+  @apply p-4 bg-emerald-400/50 hover:bg-emerald-400/70 transition cursor-pointer active:scale-95 rounded-lg;
+}
+
+.tinput {
+  @apply p-1.5 ring-1 ring-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 transition;
+}
+
+label {
+  @apply text-left text-gray-400;
+}
