@@ -30,7 +30,7 @@ export async function GET(req) {
     .from(webhookEndpoints)
     .where(eq(webhookEndpoints.companyId, companyId));
 
-  console.log("data in webhook route: ", data);
+  //   console.log("data in webhook route: ", data);
 
   return NextResponse.json({ message: data }, { status: 200 });
 }
