@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   const { name, userId } = await req.json();
-  console.log("name and userid in route: ", name, userId);
+  // console.log("name and userid in route: ", name, userId);
 
   await db.insert(companies).values({ name: name, userId: userId });
 
@@ -20,7 +20,7 @@ export async function GET(req) {
     .select()
     .from(companies)
     .where(eq(companies.userId, userId));
-  console.log("coms from db: ", coms);
+  // console.log("coms from db: ", coms);
 
   return NextResponse.json({ companies: coms }, { status: 200 });
 }

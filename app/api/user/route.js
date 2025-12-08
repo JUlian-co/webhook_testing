@@ -8,7 +8,7 @@ export async function GET(req) {
 
   const name = url.searchParams.get("name");
 
-  console.log("name in route: ", name);
+  // console.log("name in route: ", name);
 
   const user = await db
     .select()

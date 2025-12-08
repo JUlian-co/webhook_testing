@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   const { name } = await req.json();
 
-  console.log("name in route: ", name);
+  // console.log("name in route: ", name);
 
   await db.insert(usersTable).values({ name: name });
 

@@ -8,8 +8,9 @@ import { useEffect, useState } from "react";
 export default function WebhooksPage() {
   const { companyId } = useParams();
   const [com, setCom] = useState({});
-  const [creatinWH, setCreatingWH] = useState(true);
-  const [endpoints, setEndpoints] = useState(true);
+  const [creatinWH, setCreatingWH] = useState(false);
+  const [endpoints, setEndpoints] = useState([]);
+  console.log("esesesesesesesesesesesesesesesesesesese: ", endpoints);
 
   /* TODO: Nächster schritt ist es die endpoints anzuzeigen als table */
 
@@ -23,14 +24,17 @@ export default function WebhooksPage() {
     setCom(com);
 
     fetchWebhookEndpoints();
-  }, []);
+  }, [loaded, companyId]);
 
   // 39974cf5-4a7a-4920-8cd7-0e58d261f018
 
   const fetchWebhookEndpoints = async () => {
     const res = await fetch(`/api/webhook?companyId=${companyId}`);
 
-    res.json().then((e) => setEndpoints(e));
+    res.json().then(({ message }) => {
+      console.log("eeeeeeeeeee: ", message);
+      setEndpoints(message);
+    });
   };
 
   const saveWebhook = async (e) => {
@@ -69,7 +73,7 @@ export default function WebhooksPage() {
         </header>
 
         <main className="w-full">
-          <div className="flex items-center justify-between w-full">
+          <div className="flex items-center justify-between w-full mb-8">
             <h2>Webhooks</h2>
             <button className="secbutton" onClick={() => setCreatingWH(true)}>
               Create Webhook
@@ -79,6 +83,20 @@ export default function WebhooksPage() {
 
           <div>
             {/* hier kommen jetzt die webhook endpoints hin */}
+            {endpoints && (
+              <>
+                {endpoints.map((ep) => (
+                  <div
+                    key={ep.id}
+                    className="flex items-center justify-between"
+                  >
+                    <p>{ep.name}</p>
+                    <p>{ep.url}</p>
+                    <p>{ep.isActive ? "✅" : "❌"}</p>
+                  </div>
+                ))}
+              </>
+            )}
             <p></p>
           </div>
         </main>
