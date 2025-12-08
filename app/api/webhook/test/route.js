@@ -17,6 +17,7 @@ export async function POST(req) {
   console.log("endpoint obj in test wh route: ", endpoint);
 
   const payload = JSON.stringify({
+    eventType: "payment.finalized",
     amount: "100",
     currency: "USDC",
     test: true,
