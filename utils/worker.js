@@ -61,7 +61,7 @@ while (true) {
           endpointId: endpoint.id,
           status: "success",
           statusCode: res.status,
-          responseBody: resJson,
+          responseBody: resJson || "empty",
           requestBody: event.payload,
         });
       } catch (e) {

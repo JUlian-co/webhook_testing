@@ -78,3 +78,10 @@ export const webhookDeliveries = pgTable("webhook_deliveries", {
 
   deliveredAt: timestamp("delivered_at").defaultNow(),
 });
+
+/* TODO: Wir müssen noch das hier in wh deliveries einfügen attempt: integer("attempt").default(1),
+nextAttemptAt: timestamp("next_attempt_at"),
+ und auch das hier bei einem fail machen  nextAttemptAt = now + retryDelay
+attempt += 1
+status = "retrying"
+ */
