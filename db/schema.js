@@ -1,11 +1,21 @@
 import {
   integer,
+  pgEnum,
   pgTable,
   text,
   timestamp,
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
+
+export const whEventTypeEnum = pgEnum("wh_event_type", [
+  "payment.created",
+  "payment.pending",
+  "payment.finalized",
+  "payment.failed",
+  "refund.created",
+  "refund.completed",
+]);
 
 export const usersTable = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -29,6 +39,7 @@ export const webhookEndpoints = pgTable("webhook_endpoints", {
   secret: text("secret").notNull(),
   url: text("url").notNull(),
   isActive: integer("is_active").notNull().default(1),
+  eventTypes: whEventTypeEnum("event_types").array().notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -38,7 +49,7 @@ export const events = pgTable("events", {
     .references(() => companies.id)
     .notNull(),
 
-  eventType: text("event_type").notNull(),
+  eventType: whEventTypeEnum("event_type").notNull(),
   payload: text("payload").notNull(),
 
   processed: integer("processed").default(0),
