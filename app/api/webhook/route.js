@@ -15,6 +15,7 @@ export async function POST(req) {
     name,
     secret,
     url,
+    eventTypes: ["payment.created", "payment.failed"],
   });
 
   return NextResponse.json({ message: "webhook created" }, { status: 201 });

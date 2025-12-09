@@ -3,7 +3,7 @@ import { events } from "@/db/schema";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const { companyId, url } = await req.json();
+  const { companyId } = await req.json();
 
   const pt = JSON.stringify({
     amount: "100",
@@ -16,7 +16,7 @@ export async function POST(req) {
 
   await db.insert(events).values({
     companyId,
-    eventType: "payment.processed",
+    eventType: "payment.created",
     payload: JSON.stringify({
       amount: "100",
       currency: "USDC",

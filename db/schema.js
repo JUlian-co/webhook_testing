@@ -56,3 +56,25 @@ export const events = pgTable("events", {
 
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+export const webhookDeliveries = pgTable("webhook_deliveries", {
+  id: uuid("id").primaryKey().defaultRandom(),
+
+  eventId: uuid("event_id")
+    .references(() => events.id)
+    .notNull(),
+
+  endpointId: uuid("endpoint_id")
+    .references(() => webhookEndpoints.id)
+    .notNull(),
+
+  status: text("status").notNull(),
+  statusCode: integer("status_code"),
+
+  responseBody: text("response_body"),
+  requestBody: text("request_body"),
+
+  error: text("error"),
+
+  deliveredAt: timestamp("delivered_at").defaultNow(),
+});

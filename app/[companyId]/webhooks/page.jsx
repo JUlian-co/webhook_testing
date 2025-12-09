@@ -63,14 +63,15 @@ export default function WebhooksPage() {
     setCreatingWH(false);
   };
 
-  const testwh = async (id) => {
-    const res = await fetch("/api/webhook/test", {
-      method: "POST",
+  const testwh = async (companyId, id) => {
+    const res = await fetch("/api/webhook/send", {
+      /* TODO: eig war es /test */ method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         endpointId: id,
+        companyId,
       }),
     });
 
@@ -107,7 +108,9 @@ export default function WebhooksPage() {
                     <p>{ep.name}</p>
                     <p>{ep.url}</p>
                     <p>{ep.isActive ? "✅" : "❌"}</p>
-                    <button onClick={() => testwh(ep.id)}>[ test ]</button>
+                    <button onClick={() => testwh(ep.companyId, ep.id)}>
+                      [ test ]
+                    </button>
                   </div>
                 ))}
               </>
